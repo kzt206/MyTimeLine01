@@ -4,3 +4,100 @@
     height: 50px;
 }
 
+
+input[type='file']{
+    display:none;
+}
+
+#sheetFile{
+        display:inline-block;
+        background: #69c;
+        color: #fff;
+        padding:5px 10px;
+        border-radius: 100px;
+}
+
+.selectSheetFile{
+    cursor: pointer;
+}
+
+.tool-pen{
+    height:10%;
+}
+
+.penButton{
+    cursor: pointer;
+}
+
+#eraserButton, #clearButton{
+    display:inline-block;
+    background: #69c;
+    color: #fff;
+    padding:5px 10px;
+    border-radius: 100px;
+    cursor: pointer;
+}
+
+#penBlueButton{
+    display:inline-block;
+    background:blue;
+    color: #fff;
+    padding:5px 10px;
+    border-radius: 100px;
+}
+
+.stickerButton{
+    background:green;
+    color: #fff;
+    padding:5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.workspace{
+    display: flex;
+    border:solid 5px orange;
+    height:800px;
+}
+
+.tools{
+    border: solid 2px blue;
+    width: 10%;
+}
+
+
+
+.sheet{
+    border: solid 2px green;
+    width:90%;
+}
+
+.canvasSpace{
+    position: relative;
+    border:dashed 3px red;
+    /* width:500px; */
+}
+
+
+.miniCanvas{
+    border: dashed 2px blue;
+}
+
+#canvasSheet{
+    position:absolute;
+    /* top:100px; */
+    /* left:200px; */
+    /* margin-left: 200; */
+    border: solid 3px blue;
+}
+
+#canvasPaint{
+    position:absolute;
+    /* padding:100; */
+    /* margin-left: 500; */
+    border: solid 2px green;
+}
+
+.sticker{
+    border: solid 2px yellow;
+}
