@@ -69,15 +69,22 @@ nameStickerButton.addEventListener("click",() => {
 	ctxNameSticker.textAlign = 'left';
     //文字のスタイルを指定
 	ctxNameSticker.font = '22px serif';
-	ctxNameSticker.fillStyle = 'black';
+	ctxNameSticker.fillStyle = 'red';
     ctxNameSticker.fillText(memoName.value, 10, 10);
 
     let link = document.createElement("a");
-    // link.href = canvasNameSticker.toDataURL("image/png");
+    link.href = canvasNameSticker.toDataURL("image/png");
     link.download = "tmp/nameSticker.png";
     link.click();
 
+    penStatus = "nameSticker";
+
 })
+
+//スタンプの設置
+//スタンプ画像の設定
+const charaNameSticker = new Image();
+charaNameSticker.src = "tmp/tmp_nameSticker.png"
 
 //canvasをクリックしたときのイベント設定
 this.canvasPaint.addEventListener("mousedown",(e) => {
@@ -87,8 +94,8 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
     console.log("x:",x,"y:",y);
     //penStatusの状態に応じて挙動変更
     console.log("Penstatus;",penStatus);
-      if(penStatus == "home") {
-        ctxPaint.drawImage(charaHome,x+25,y+25);
+      if(penStatus == "nameSticker") {
+        ctxPaint.drawImage(charaNameSticker,x,y);
       } else if(penStatus == "school"){
         ctxPaint.drawImage(charaSchool,x+25,y+25);
       } else if(penStatus == "evacuation"){
