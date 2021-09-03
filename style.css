@@ -83,6 +83,10 @@ input[type='file']{
     border: dashed 2px blue;
 }
 
+#canvasNameSticker{
+    display: none !important; 非表示設定
+}
+
 #canvasSheet{
     position:absolute;
     /* top:100px; */

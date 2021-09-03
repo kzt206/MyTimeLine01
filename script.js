@@ -4,8 +4,8 @@ const ctxSheet = canvasSheet.getContext("2d");
 const canvasPaint = document.querySelector("#canvasPaint");
 const ctxPaint = canvasPaint.getContext("2d");
 
-canvasSheet.width = 3146/3;
-canvasSheet.height = 2263/3;
+canvasSheet.width = 3146/2;
+canvasSheet.height = 2263/2;
 canvasPaint.width = canvasSheet.width;
 canvasPaint.height = canvasSheet.height;
 
@@ -58,9 +58,11 @@ eraserButton.addEventListener("click",() => {
 //名前シールボタンの設定
 const canvasNameSticker = document.getElementById("canvasNameSticker");
 const ctxNameSticker = canvasNameSticker.getContext("2d");
-canvasNameSticker.width = 100;
+canvasNameSticker.width = 200;
 canvasNameSticker.height = 50;
 const nameStickerButton = document.getElementById("nameStickerButton");
+let base64name;
+let nameStickerURL;
 nameStickerButton.addEventListener("click",() => {
     ctxNameSticker.clearRect(0, 0, canvasNameSticker.width, canvasNameSticker.height);
     const nameSticker = document.getElementById("memoName");
@@ -72,11 +74,15 @@ nameStickerButton.addEventListener("click",() => {
 	ctxNameSticker.fillStyle = 'red';
     ctxNameSticker.fillText(memoName.value, 10, 10);
 
-    let link = document.createElement("a");
-    link.href = canvasNameSticker.toDataURL("image/png");
-    link.download = "tmp/nameSticker.png";
-    link.click();
-
+    // let link = document.createElement("a");
+    nameStickerURL = canvasNameSticker.toDataURL("image/png");
+    // link.download = "tmp/nameSticker.png";
+    // link.click();
+    
+    // base64name = canvasNameSticker.toDataURL();
+    // window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
+    // charaNameSticker.src = base64name;
+    
     penStatus = "nameSticker";
 
 })
@@ -84,7 +90,7 @@ nameStickerButton.addEventListener("click",() => {
 //スタンプの設置
 //スタンプ画像の設定
 const charaNameSticker = new Image();
-charaNameSticker.src = "tmp/tmp_nameSticker.png"
+charaNameSticker.src = nameStickerURL; //"tmp/tmp_nameSticker.png"
 
 //canvasをクリックしたときのイベント設定
 this.canvasPaint.addEventListener("mousedown",(e) => {
@@ -175,8 +181,10 @@ let cursor = document.querySelector(".mouse");
 canvasPaint.addEventListener("mouseenter",(event)=>{
     // console.log("mouse enter");
     switch(penStatus){
-        case "home":
-            canvasPaint.style.cursor = "url(home.cur), auto";
+        case "nameSticker":
+            // canvasPaint.style.cursor = "url(tmp/tmp_nameSticker.png), auto";
+            canvasPaint.style.cursor = "url(" + nameStickerURL +"), auto";
+            console.log("url(" + nameStickerURL +"), auto")
             break;
         case "school":
             canvasPaint.style.cursor = "url(school.cur),auto";
