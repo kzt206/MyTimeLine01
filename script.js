@@ -70,18 +70,19 @@ nameStickerButton.addEventListener("click",() => {
 	ctxNameSticker.textBaseline = 'top';
 	ctxNameSticker.textAlign = 'left';
     //文字のスタイルを指定
-	ctxNameSticker.font = '22px serif';
+	ctxNameSticker.font = '20px serif';
 	ctxNameSticker.fillStyle = 'red';
     ctxNameSticker.fillText(memoName.value, 10, 10);
 
     // let link = document.createElement("a");
-    nameStickerURL = canvasNameSticker.toDataURL("image/png");
+    // nameStickerURL = canvasNameSticker.toDataURL("image/png");
     // link.download = "tmp/nameSticker.png";
     // link.click();
     
-    // base64name = canvasNameSticker.toDataURL();
-    // window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
-    // charaNameSticker.src = base64name;
+    //一時保存
+    base64name = canvasNameSticker.toDataURL();
+    window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
+    charaNameSticker.src = base64name;
     
     penStatus = "nameSticker";
 
@@ -91,6 +92,9 @@ nameStickerButton.addEventListener("click",() => {
 //スタンプ画像の設定
 const charaNameSticker = new Image();
 charaNameSticker.src = nameStickerURL; //"tmp/tmp_nameSticker.png"
+
+const cursorName = new Image();
+cursorName.src = "nameSticker.png";
 
 //canvasをクリックしたときのイベント設定
 this.canvasPaint.addEventListener("mousedown",(e) => {
@@ -183,8 +187,9 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
     switch(penStatus){
         case "nameSticker":
             // canvasPaint.style.cursor = "url(tmp/tmp_nameSticker.png), auto";
-            canvasPaint.style.cursor = "url(" + nameStickerURL +"), auto";
-            console.log("url(" + nameStickerURL +"), auto")
+            // canvasPaint.style.cursor = "url(" + nameStickerURL + ", auto";
+            canvasPaint.style.cursor = "url(" + cursorName.src + "), auto";
+            console.log("url(" + cursorName.src + "), auto");
             break;
         case "school":
             canvasPaint.style.cursor = "url(school.cur),auto";
