@@ -99,10 +99,10 @@ nameStickerButton.addEventListener("click",() => {
 //スタンプの設置
 //スタンプ画像の設定
 const charaNameSticker = new Image();
-charaNameSticker.src = nameStickerURL; //"tmp/tmp_nameSticker.png"
+// charaNameSticker.src = nameStickerURL; //"tmp/tmp_nameSticker.png"
 
-const cursorName = new Image();
-cursorName.src = "nameSticker.png";
+// const cursorName = new Image();
+// cursorName.src = "nameSticker.png";
 
 //canvasをクリックしたときのイベント設定
 this.canvasPaint.addEventListener("mousedown",(e) => {
@@ -200,8 +200,10 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
         case "nameSticker":
             // canvasPaint.style.cursor = "url(tmp/tmp_nameSticker.png), auto";
             // canvasPaint.style.cursor = "url(" + nameStickerURL + ", auto";
-            canvasPaint.style.cursor = "url(" + cursorName.src + "), auto";
-            console.log("url(" + cursorName.src + "), auto");
+            canvasPaint.style.cursor = "url('nameSticker.png'), auto";
+            // canvasPaint.style.cursor = "url(school.cur), auto";
+            console.log("nameSticker cursor")
+            // console.log("url(" + cursorName.src + "), auto");
             break;
         case "school":
             canvasPaint.style.cursor = "url(school.cur),auto";
