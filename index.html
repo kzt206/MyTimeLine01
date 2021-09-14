@@ -29,6 +29,9 @@
             </div>
             <a id="eraserButton" class="textButton">Eraser</a>
             <a id="clearButton"  class="textButton">Clear</a>
+            <a id="contactButton"  class="contactButton">Contact</a>
+            <a id="saveButton"  class="saveButton">Save</a>
+
 
             名前<input type="text" id="memoName" class="memoInput" placeholder="名前"></input>
             <a id="nameStickerButton" class="stickerButton">名前シール</a>
@@ -42,14 +45,22 @@
         <div class="sheet">
             sheet
             <div class="canvasSpace">
-                <canvas id="canvasSheet"></canvas>
-                <canvas id="canvasPaint"></canvas>
+                <canvas id="canvasSheet" style="width:1048px; height:754px"></canvas>
+                <!-- 3146/2 ,2263/2 -->
+                <canvas id="canvasPaint" style="width:1048px; height:754px"></canvas>
             </div>
         </div>
     </div>
 
     <div class="sticker">
         sticker
+    </div>
+
+    <!-- 結合用 -->
+    <div class="canvas-contact">
+        <!-- "test"canvas contact -->
+        <!-- <a id="buttonContact" class="buttonContact">Contact</a> -->
+        <canvas id="canvasContact"></canvas>
     </div>
 
 

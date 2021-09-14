@@ -4,12 +4,20 @@ const ctxSheet = canvasSheet.getContext("2d");
 const canvasPaint = document.querySelector("#canvasPaint");
 const ctxPaint = canvasPaint.getContext("2d");
 
-canvasSheet.width = 3146/2;
-canvasSheet.height = 2263/2;
+original_width = 3146;  //style="width:1048px; height:754px"
+original_height = 2263;
+canvasFactor = 3;
+
+canvasSheet.width = original_width;
+canvasSheet.height = original_height;
 canvasPaint.width = canvasSheet.width;
 canvasPaint.height = canvasSheet.height;
 
-
+//結合用キャンバスの設定
+const canvasContact = document.querySelector("#canvasContact");
+const ctxContact = canvasContact.getContext("2d");
+canvasContact.width = canvasSheet.width;
+canvasContact.height = canvasSheet.height;
 
 //マップ画像の読み込み
 const selectSheetFile = document.getElementById("sheetFile");
@@ -58,8 +66,8 @@ eraserButton.addEventListener("click",() => {
 //名前シールボタンの設定
 const canvasNameSticker = document.getElementById("canvasNameSticker");
 const ctxNameSticker = canvasNameSticker.getContext("2d");
-canvasNameSticker.width = 200;
-canvasNameSticker.height = 50;
+canvasNameSticker.width = 600;
+canvasNameSticker.height = 150;
 const nameStickerButton = document.getElementById("nameStickerButton");
 let base64name;
 let nameStickerURL;
@@ -70,7 +78,7 @@ nameStickerButton.addEventListener("click",() => {
 	ctxNameSticker.textBaseline = 'top';
 	ctxNameSticker.textAlign = 'left';
     //文字のスタイルを指定
-	ctxNameSticker.font = '20px serif';
+	ctxNameSticker.font = '60px serif';
 	ctxNameSticker.fillStyle = 'red';
     ctxNameSticker.fillText(memoName.value, 10, 10);
 
@@ -98,14 +106,18 @@ cursorName.src = "nameSticker.png";
 
 //canvasをクリックしたときのイベント設定
 this.canvasPaint.addEventListener("mousedown",(e) => {
-    let x = e.offsetX-25;
-    let y = e.offsetY-25;
+    // let x = e.offsetX-25;
+    // let y = e.offsetY-25;
+    let x = e.offsetX * canvasFactor ;
+    let y = e.offsetY * canvasFactor ;
 
-    console.log("x:",x,"y:",y);
+    console.log("offsetX:",e.offsetX,"offsetY:",e.offsetY);
+    console.log("x:",x," y:",y);
+
     //penStatusの状態に応じて挙動変更
     console.log("Penstatus;",penStatus);
       if(penStatus == "nameSticker") {
-        ctxPaint.drawImage(charaNameSticker,x,y);
+        ctxPaint.drawImage(charaNameSticker,x,y-30);
       } else if(penStatus == "school"){
         ctxPaint.drawImage(charaSchool,x+25,y+25);
       } else if(penStatus == "evacuation"){
@@ -165,8 +177,8 @@ function drawLine(x1,y1,x2,y2){
 }
 canvasPaint.addEventListener("mousedown",(e)=>{
     isDrag = true;
-    x = e.offsetX;
-    y = e.offsetY;
+    x = e.offsetX * canvasFactor;
+    y = e.offsetY * canvasFactor;
     // console.log(x,y)
 });
 canvasPaint.addEventListener("mouseup",()=>{
@@ -175,7 +187,7 @@ canvasPaint.addEventListener("mouseup",()=>{
     y = undefined;
 });
 canvasPaint.addEventListener("mousemove",(event)=>{
-    draw(event.offsetX,event.offsetY);
+    draw(event.offsetX * canvasFactor ,event.offsetY * canvasFactor);
 });
 
 
@@ -220,5 +232,46 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
 
     
     }
+
     
 });
+
+
+//contactボタンの実装
+const contactButton = document.getElementById("contactButton");
+contactButton.addEventListener("click",(e) => {
+
+    console.log("contactButton is clicked.");
+
+
+    ctxContact.clearRect(0,0,canvasContact.width,canvasContact.height);
+
+    let image1 = createImage(ctxSheet);
+    image1.onload = function(){
+        ctxContact.drawImage(image1,0,0,original_width,original_height);
+    }
+    let image2 = createImage(ctxPaint);
+    image2.onload = function(){
+        ctxContact.drawImage(image2,0,0,original_width,original_height);
+    }
+
+}); 
+
+//saveボタンの実装
+const saveButton = document.getElementById("saveButton");
+saveButton.addEventListener("click",(e) =>{
+    console.log("saveButton is clicked");
+
+    let link = document.createElement("a");
+    link.href = canvasContact.toDataURL("image/png");
+    link.download = "test.png";
+    link.click();
+
+});
+
+
+let createImage= function(context){
+    var image= new Image
+    image.src= context.canvas.toDataURL()
+    return image
+}
