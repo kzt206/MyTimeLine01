@@ -96,10 +96,42 @@ nameStickerButton.addEventListener("click",() => {
 
 })
 
+//二重円ボタンの設定
+const doubleCircleButton = document.getElementById("doubleCircleButton");
+doubleCircleButton.addEventListener("click",()=> {
+    penStatus = "doubleCircle";
+})
+
+//円ボタンの設定
+const singleCircleButton = document.getElementById("singleCircleButton");
+singleCircleButton.addEventListener("click",()=> {
+    penStatus = "singleCircle";
+})
+
+//矢印ボタンの設定
+const arrowButton = document.getElementById("arrowButton");
+arrowButton.addEventListener("click",()=> {
+    penStatus = "arrow";
+})
+
+//避難準備ボタンの設定
+const hinanJunbiButton = document.getElementById("hinanJunbiButton");
+hinanJunbiButton.addEventListener("click",()=> {
+    penStatus = "hinanJunbi";
+})
+
 //スタンプの設置
 //スタンプ画像の設定
 const charaNameSticker = new Image();
 // charaNameSticker.src = nameStickerURL; //"tmp/tmp_nameSticker.png"
+const charaDoubleCircle = new Image();
+charaDoubleCircle.src = "image/DoubleCircle.png"
+const charaSingleCircle = new Image();
+charaSingleCircle.src = "image/SingleCircle.png"
+const charaArrow = new Image();
+charaArrow.src = "image/arrow.png"
+const charaHinanJunbi = new Image();
+charaHinanJunbi.src = "image/HinanJunbi400.png"
 
 // const cursorName = new Image();
 // cursorName.src = "nameSticker.png";
@@ -118,14 +150,14 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
     console.log("Penstatus;",penStatus);
       if(penStatus == "nameSticker") {
         ctxPaint.drawImage(charaNameSticker,x,y-30);
-      } else if(penStatus == "school"){
-        ctxPaint.drawImage(charaSchool,x+25,y+25);
-      } else if(penStatus == "evacuation"){
-        ctxPaint.drawImage(charaEvacuation,x+25,y+25);
-      } else if(penStatus == "camera1"){
-        ctxPaint.drawImage(charaCamera1,x+25,y+25);
-      } else if(penStatus == "camera2"){
-        ctxPaint.drawImage(charaCamera2,x+25,y+25);
+      } else if(penStatus == "doubleCircle"){
+        ctxPaint.drawImage(charaDoubleCircle,x,y);
+      } else if(penStatus == "singleCircle"){
+        ctxPaint.drawImage(charaSingleCircle,x,y);
+      } else if(penStatus == "arrow"){
+        ctxPaint.drawImage(charaArrow,x-10,y-25);
+      } else if(penStatus == "hinanJunbi"){
+        ctxPaint.drawImage(charaHinanJunbi,x,y-25);
       } else if(penStatus == "camera3"){
         ctxPaint.drawImage(charaCamera3,x+25,y+25);
       } else if(penStatus == "camera4"){
@@ -133,7 +165,7 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
       } else if(penStatus == "camera5"){
         ctxPaint.drawImage(charaCamera5,x+25,y+25);
       } else if(penStatus == "eraser"){
-        ctxPaint.clearRect(e.offsetX,e.offsetY,20,20);
+        ctxPaint.clearRect(e.offsetX,e.offsetY,60,60);
       }
 })
 
@@ -172,7 +204,7 @@ function drawLine(x1,y1,x2,y2){
     ctxPaint.moveTo(x1,y1);
     ctxPaint.lineTo(x2,y2);
     ctxPaint.strokeStyle = ctxPaint.fillStyle;
-    ctxPaint.lineWidth = penSize * 2;
+    ctxPaint.lineWidth = penSize * 3;
     ctxPaint.stroke();
 }
 canvasPaint.addEventListener("mousedown",(e)=>{
@@ -205,14 +237,14 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
             console.log("nameSticker cursor")
             // console.log("url(" + cursorName.src + "), auto");
             break;
-        case "school":
-            canvasPaint.style.cursor = "url(school.cur),auto";
+        case "doubleCircle":
+            canvasPaint.style.cursor = "url('image/DoubleCircle15.png'),auto";
             break;
-        case "evacuation":
-            canvasPaint.style.cursor = "url(evacuation.cur),auto";
+        case "singleCircle":
+            canvasPaint.style.cursor = "url('image/SingleCircle15.png'),auto";
             break;
-        case "camera1":
-            canvasPaint.style.cursor = "url(camera1.cur),auto";
+        case "arrow":
+            canvasPaint.style.cursor = "url('image/arrow.png'),auto";
             break;
         case "camera2":
             canvasPaint.style.cursor = "url(camera2.cur),auto";
@@ -239,7 +271,7 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
 });
 
 
-//contactボタンの実装
+//downloadボタンの実装
 const downloadButton = document.getElementById("downloadButton");
 downloadButton.addEventListener("click",(e) => {
 
