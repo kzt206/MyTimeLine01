@@ -240,11 +240,12 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
 
 
 //contactボタンの実装
-const contactButton = document.getElementById("contactButton");
-contactButton.addEventListener("click",(e) => {
+const downloadButton = document.getElementById("downloadButton");
+downloadButton.addEventListener("click",(e) => {
 
     console.log("contactButton is clicked.");
 
+    // contactCtx2(saveImage,ctxSheet,ctxPaint);
 
     ctxContact.clearRect(0,0,canvasContact.width,canvasContact.height);
 
@@ -252,28 +253,30 @@ contactButton.addEventListener("click",(e) => {
     image1.onload = function(){
         ctxContact.drawImage(image1,0,0,original_width,original_height);
     }
+
     let image2 = createImage(ctxPaint);
     image2.onload = function(){
         ctxContact.drawImage(image2,0,0,original_width,original_height);
     }
 
+
+    // contactCtx(ctxSheet,ctxPaint);
+
+    // 500ms 待ってから保存
+    setTimeout(function(){
+        console.log("save function start")
+        let link = document.createElement("a");
+        link.href = canvasContact.toDataURL("image/png");
+        link.download = "test.png";
+        link.click();    
+    },500)
+
 }); 
-
-//saveボタンの実装
-const saveButton = document.getElementById("saveButton");
-saveButton.addEventListener("click",(e) =>{
-    console.log("saveButton is clicked");
-
-    let link = document.createElement("a");
-    link.href = canvasContact.toDataURL("image/png");
-    link.download = "test.png";
-    link.click();
-
-});
-
 
 let createImage= function(context){
     var image= new Image
     image.src= context.canvas.toDataURL()
     return image
 }
+
+
