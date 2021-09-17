@@ -80,7 +80,7 @@ input[type='file']{
 
 
 .miniCanvas{
-    border: dashed 2px blue;
+    /* border: dashed 2px blue; */
 }
 
 
@@ -108,6 +108,14 @@ input[type='file']{
     display: none !important; /* 非表示設定 */
 }
 
-#canvasNameSticker{
+#canvasNameSticker,#canvasSagyouTimeSticker{
     display: none !important; /* 非表示設定 */
+}
+
+#sagyouTime{
+    background-color:green;
+}
+
+#sagyouTimeNumber{
+    width:100px;
 }

@@ -50,6 +50,10 @@
                 <a id='arrowButton'class="iconButton"><img src="image/arrow2.png"></a>
                 <a id='hinanJunbiButton'class="iconButton"><img src="image/HinanJunbi2.png"></a>
             </div>
+            <div id="sagyouTime">
+                作業にかかる時間（ <input type="number" id="sagyouTimeNumber"> ）分
+                <canvas id="canvasSagyouTimeSticker"></canvas>
+            </div>
             <!-- <a id='singleCircleButton'class="iconButton"><img src="image/SingleCircle.png"></a> -->
         </div>
 
@@ -58,9 +62,11 @@
         <div class="sheet">
             sheet
             <div class="canvasSpace">
-                <canvas id="canvasSheet" style="width:1048px; height:754px"></canvas>
+                <!-- <canvas id="canvasSheet" style="width:1048px; height:754px"></canvas> -->
+                <canvas id="canvasSheet"></canvas>
                 <!-- 3146/2 ,2263/2 -->
-                <canvas id="canvasPaint" style="width:1048px; height:754px"></canvas>
+                <!-- <canvas id="canvasPaint" style="width:1048px; height:754px"></canvas> -->
+                <canvas id="canvasPaint"></canvas>
             </div>
         </div>
     </div>
@@ -73,7 +79,7 @@
     <div class="canvas-contact">
         <!-- "test"canvas contact -->
         <!-- <a id="buttonContact" class="buttonContact">Contact</a> -->
-        <canvas id="canvasContact" style="width:262px; height:188px"></canvas>
+        <canvas id="canvasContact"></canvas>
     </div>
 
 
