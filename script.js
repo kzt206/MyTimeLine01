@@ -10,8 +10,12 @@ canvasFactor = 3;
 
 canvasSheet.width = original_width;
 canvasSheet.height = original_height;
+canvasSheet.style.width = original_width/canvasFactor + "px";
+canvasSheet.style.height = original_height/canvasFactor + "px";
 canvasPaint.width = canvasSheet.width;
 canvasPaint.height = canvasSheet.height;
+canvasPaint.style.width = original_width/canvasFactor + "px";
+canvasPaint.style.height = original_height/canvasFactor + "px";
 
 //結合用キャンバスの設定
 const canvasContact = document.querySelector("#canvasContact");
@@ -80,7 +84,7 @@ nameStickerButton.addEventListener("click",() => {
     //文字のスタイルを指定
 	ctxNameSticker.font = '60px serif';
 	ctxNameSticker.fillStyle = 'red';
-    ctxNameSticker.fillText(memoName.value, 10, 10);
+    ctxNameSticker.fillText(nameSticker.value, 10, 10);
 
     // let link = document.createElement("a");
     // nameStickerURL = canvasNameSticker.toDataURL("image/png");
@@ -119,6 +123,34 @@ const hinanJunbiButton = document.getElementById("hinanJunbiButton");
 hinanJunbiButton.addEventListener("click",()=> {
     penStatus = "hinanJunbi";
 })
+
+//作業時間ボタンの設定
+const canvasSagyouTimeSticker = document.getElementById("canvasSagyouTimeSticker");
+const ctxSagyouTimeSticker = canvasSagyouTimeSticker.getContext("2d");
+canvasSagyouTimeSticker.width = 600;
+canvasSagyouTimeSticker.height = 150;
+const sagyouTimeButton = document.getElementById("sagyouTimeButton");
+let sagyouTimeStickerURL;
+sagyouTimeButton.addEventListener("click",()=> {
+    ctxSagyouTimeSticker.clearRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+    const sagyouTimeNumber = document.getElementById("sagyouTimeNumber");
+    //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
+    ctxSagyouTimeSticker.textBaseline = 'top';
+    ctxSagyouTimeSticker.textAlign = 'left';
+    //文字のスタイルを指定
+    ctxSagyouTimeSticker.font = '60px serif';
+    ctxSagyouTimeSticker.fillStyle = 'red';
+    ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 10, 10);
+    
+
+3996    //一時保存
+    base64name = canvasNameSticker.toDataURL();
+    window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
+    charaNameSticker.src = base64name;
+    
+    penStatus = "sagyouTimeSticker";
+})
+
 
 //スタンプの設置
 //スタンプ画像の設定
@@ -180,7 +212,7 @@ clearButton.addEventListener("click",()=>{
 // マウスがドラッグされているか(クリックされたままか)判断するためのフラグ
 let isDrag = false;
 //線の色の初期設定
-let penSize = 4;
+let penSize = 5;
 ctxPaint.fillStyle = "blue";
 ctxPaint.strokeStyle = ctxPaint.fillStyle;
 //線を描く関数
@@ -204,7 +236,7 @@ function drawLine(x1,y1,x2,y2){
     ctxPaint.moveTo(x1,y1);
     ctxPaint.lineTo(x2,y2);
     ctxPaint.strokeStyle = ctxPaint.fillStyle;
-    ctxPaint.lineWidth = penSize * 3;
+    ctxPaint.lineWidth = penSize * canvasFactor;
     ctxPaint.stroke();
 }
 canvasPaint.addEventListener("mousedown",(e)=>{
@@ -244,7 +276,7 @@ canvasPaint.addEventListener("mouseenter",(event)=>{
             canvasPaint.style.cursor = "url('image/SingleCircle15.png'),auto";
             break;
         case "arrow":
-            canvasPaint.style.cursor = "url('image/arrow.png'),auto";
+            canvasPaint.style.cursor = "url('image/arrow3.png'),auto";
             break;
         case "camera2":
             canvasPaint.style.cursor = "url(camera2.cur),auto";
