@@ -118,38 +118,71 @@ arrowButton.addEventListener("click",()=> {
     penStatus = "arrow";
 })
 
-//避難準備ボタンの設定
-const hinanJunbiButton = document.getElementById("hinanJunbiButton");
-hinanJunbiButton.addEventListener("click",()=> {
-    penStatus = "hinanJunbi";
-})
+// //避難準備ボタンの設定
+// const hinanJunbiButton = document.getElementById("hinanJunbiButton");
+// hinanJunbiButton.addEventListener("click",()=> {
+//     penStatus = "hinanJunbi";
+// })
 
 //作業時間ボタンの設定
 const canvasSagyouTimeSticker = document.getElementById("canvasSagyouTimeSticker");
 const ctxSagyouTimeSticker = canvasSagyouTimeSticker.getContext("2d");
-canvasSagyouTimeSticker.width = 600;
+canvasSagyouTimeSticker.width = 700;
 canvasSagyouTimeSticker.height = 150;
 const sagyouTimeButton = document.getElementById("sagyouTimeButton");
 let sagyouTimeStickerURL;
 sagyouTimeButton.addEventListener("click",()=> {
+    //クリア
     ctxSagyouTimeSticker.clearRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+    //四角で塗りつぶし
+    ctxSagyouTimeSticker.fillStyle = 'white';
+    ctxSagyouTimeSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+    
     const sagyouTimeNumber = document.getElementById("sagyouTimeNumber");
     //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
     ctxSagyouTimeSticker.textBaseline = 'top';
     ctxSagyouTimeSticker.textAlign = 'left';
     //文字のスタイルを指定
-    ctxSagyouTimeSticker.font = '60px serif';
-    ctxSagyouTimeSticker.fillStyle = 'red';
-    ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 10, 10);
-    
-
-3996    //一時保存
-    base64name = canvasNameSticker.toDataURL();
+    ctxSagyouTimeSticker.font = 'bold 60px serif';
+    ctxSagyouTimeSticker.fillStyle = 'blue';
+    ctxSagyouTimeSticker.fillText("避難準備の開始", 10, 10);
+    ctxSagyouTimeSticker.font = '50px serif';
+    ctxSagyouTimeSticker.fillText("作業にかかる時間（", 10, 80);
+    ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 500, 80);
+    ctxSagyouTimeSticker.fillText("）分", 570, 80);
+    //一時保存
+    base64name = canvasSagyouTimeSticker.toDataURL();
     window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
-    charaNameSticker.src = base64name;
+    charaSagyouTimeSticker.src = base64name;
     
     penStatus = "sagyouTimeSticker";
 })
+
+
+function createSticker1(ctxSticker,){
+        //クリア
+        ctxSagyouTimeSticker.clearRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+        //四角で塗りつぶし
+        ctxSagyouTimeSticker.fillStyle = 'white';
+        ctxSagyouTimeSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+        
+        const sagyouTimeNumber = document.getElementById("sagyouTimeNumber");
+        //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
+        ctxSagyouTimeSticker.textBaseline = 'top';
+        ctxSagyouTimeSticker.textAlign = 'left';
+        //文字のスタイルを指定
+        ctxSagyouTimeSticker.font = 'bold 60px serif';
+        ctxSagyouTimeSticker.fillStyle = 'blue';
+        ctxSagyouTimeSticker.fillText("避難準備の開始", 10, 10);
+        ctxSagyouTimeSticker.font = '50px serif';
+        ctxSagyouTimeSticker.fillText("作業にかかる時間（", 10, 80);
+        ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 500, 80);
+        ctxSagyouTimeSticker.fillText("）分", 570, 80);
+        //一時保存
+        base64name = canvasSagyouTimeSticker.toDataURL();
+        window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
+        charaSagyouTimeSticker.src = base64name;
+}
 
 
 //スタンプの設置
@@ -162,8 +195,9 @@ const charaSingleCircle = new Image();
 charaSingleCircle.src = "image/SingleCircle.png"
 const charaArrow = new Image();
 charaArrow.src = "image/arrow.png"
-const charaHinanJunbi = new Image();
-charaHinanJunbi.src = "image/HinanJunbi400.png"
+// const charaHinanJunbi = new Image();
+// charaHinanJunbi.src = "image/HinanJunbi400.png"
+const charaSagyouTimeSticker = new Image();
 
 // const cursorName = new Image();
 // cursorName.src = "nameSticker.png";
@@ -190,8 +224,8 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
         ctxPaint.drawImage(charaArrow,x-10,y-25);
       } else if(penStatus == "hinanJunbi"){
         ctxPaint.drawImage(charaHinanJunbi,x,y-25);
-      } else if(penStatus == "camera3"){
-        ctxPaint.drawImage(charaCamera3,x+25,y+25);
+      } else if(penStatus == "sagyouTimeSticker"){
+        ctxPaint.drawImage(charaSagyouTimeSticker,x+25,y+25);
       } else if(penStatus == "camera4"){
         ctxPaint.drawImage(charaCamera4,x+25,y+25);
       } else if(penStatus == "camera5"){

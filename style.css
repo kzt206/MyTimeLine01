@@ -9,6 +9,10 @@ input[type='file']{
     display:none;
 }
 
+#memoName{
+    width: 150px;
+}
+
 #sheetFile{
         display:inline-block;
         background: #69c;
@@ -62,7 +66,7 @@ input[type='file']{
 
 .tools{
     border: solid 2px blue;
-    width: 10%;
+    width: 20%;
 }
 
 
@@ -112,10 +116,10 @@ input[type='file']{
     display: none !important; /* 非表示設定 */
 }
 
-#sagyouTime{
+#sagyouTimeButton{
     background-color:green;
 }
 
 #sagyouTimeNumber{
-    width:100px;
+    width:60px;
 }
