@@ -112,7 +112,7 @@ input[type='file']{
     display: none !important; /* 非表示設定 */
 }
 
-#canvasNameSticker,#canvasSagyouTimeSticker{
+#canvasNameSticker,#canvasSagyouTimeSticker,#canvasHinanKaishiSticker{
     display: none !important; /* 非表示設定 */
 }
 
@@ -120,6 +120,6 @@ input[type='file']{
     background-color:green;
 }
 
-#sagyouTimeNumber{
+#sagyouTimeNumber,#hinanKaishiNumber{
     width:60px;
 }

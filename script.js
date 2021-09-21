@@ -127,61 +127,63 @@ arrowButton.addEventListener("click",()=> {
 //作業時間ボタンの設定
 const canvasSagyouTimeSticker = document.getElementById("canvasSagyouTimeSticker");
 const ctxSagyouTimeSticker = canvasSagyouTimeSticker.getContext("2d");
-canvasSagyouTimeSticker.width = 700;
+canvasSagyouTimeSticker.width = 800;
 canvasSagyouTimeSticker.height = 150;
 const sagyouTimeButton = document.getElementById("sagyouTimeButton");
 let sagyouTimeStickerURL;
 sagyouTimeButton.addEventListener("click",()=> {
-    //クリア
-    ctxSagyouTimeSticker.clearRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
-    //四角で塗りつぶし
-    ctxSagyouTimeSticker.fillStyle = 'white';
-    ctxSagyouTimeSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
-    
+       
+    const string1 = "避難準備の開始"
+    const string2 = "作業にかかる時間（"
     const sagyouTimeNumber = document.getElementById("sagyouTimeNumber");
-    //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
-    ctxSagyouTimeSticker.textBaseline = 'top';
-    ctxSagyouTimeSticker.textAlign = 'left';
-    //文字のスタイルを指定
-    ctxSagyouTimeSticker.font = 'bold 60px serif';
-    ctxSagyouTimeSticker.fillStyle = 'blue';
-    ctxSagyouTimeSticker.fillText("避難準備の開始", 10, 10);
-    ctxSagyouTimeSticker.font = '50px serif';
-    ctxSagyouTimeSticker.fillText("作業にかかる時間（", 10, 80);
-    ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 500, 80);
-    ctxSagyouTimeSticker.fillText("）分", 570, 80);
-    //一時保存
-    base64name = canvasSagyouTimeSticker.toDataURL();
-    window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
-    charaSagyouTimeSticker.src = base64name;
-    
+    charaSagyouTimeSticker.src = createSticker1(ctxSagyouTimeSticker,canvasSagyouTimeSticker,sagyouTimeNumber.value,string1,string2)
+
     penStatus = "sagyouTimeSticker";
 })
 
+//避難開始ボタンの設定
+const canvasHinanKaishiSticker = document.getElementById("canvasHinanKaishiSticker");
+const ctxHinanKaishiSticker = canvasHinanKaishiSticker.getContext("2d");
+canvasHinanKaishiSticker.width = 800;
+canvasHinanKaishiSticker.height = 150;
+const hinanKaishiButton = document.getElementById("hinanKaishiButton");
+let hinanKaishiStickerURL;
+hinanKaishiButton.addEventListener("click",()=> {
+    // console.log("hinankKaishiButton is clicked.")
+    const string1 = "避難開始"
+    const string2 = "避難にかかる時間（"
+    const hinanKaishiNumber = document.getElementById("hinanKaishiNumber");
+    charaHinanKaishiSticker.src = createSticker1(ctxHinanKaishiSticker,canvasHinanKaishiSticker,hinanKaishiNumber.value,string1,string2)
 
-function createSticker1(ctxSticker,){
+    penStatus = "hinanKaishiSticker";
+})
+
+
+function createSticker1(ctxSticker,canvasSticker,timeNumber,string1,string2){
+        // console.log("in createStikcer1")
         //クリア
-        ctxSagyouTimeSticker.clearRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+        ctxSticker.clearRect(0, 0, canvasSticker.width, canvasSticker.height);
         //四角で塗りつぶし
-        ctxSagyouTimeSticker.fillStyle = 'white';
-        ctxSagyouTimeSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
+        ctxSticker.fillStyle = 'white';
+        ctxSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
         
-        const sagyouTimeNumber = document.getElementById("sagyouTimeNumber");
+    
         //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
-        ctxSagyouTimeSticker.textBaseline = 'top';
-        ctxSagyouTimeSticker.textAlign = 'left';
+        ctxSticker.textBaseline = 'top';
+        ctxSticker.textAlign = 'left';
         //文字のスタイルを指定
-        ctxSagyouTimeSticker.font = 'bold 60px serif';
-        ctxSagyouTimeSticker.fillStyle = 'blue';
-        ctxSagyouTimeSticker.fillText("避難準備の開始", 10, 10);
-        ctxSagyouTimeSticker.font = '50px serif';
-        ctxSagyouTimeSticker.fillText("作業にかかる時間（", 10, 80);
-        ctxSagyouTimeSticker.fillText(sagyouTimeNumber.value, 500, 80);
-        ctxSagyouTimeSticker.fillText("）分", 570, 80);
+        ctxSticker.font = 'bold 60px serif';
+        ctxSticker.fillStyle = 'blue';
+        ctxSticker.fillText(string1, 110, 10);
+        ctxSticker.font = '50px serif';
+        ctxSticker.fillText(string2, 110, 80);
+        ctxSticker.fillText(timeNumber, 600, 80);
+        ctxSticker.fillText("）分", 670, 80);
         //一時保存
-        base64name = canvasSagyouTimeSticker.toDataURL();
+        base64name = canvasSticker.toDataURL();
         window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
-        charaSagyouTimeSticker.src = base64name;
+        // charaSagyouTimeSticker.src = base64name
+        return base64name;
 }
 
 
@@ -198,6 +200,7 @@ charaArrow.src = "image/arrow.png"
 // const charaHinanJunbi = new Image();
 // charaHinanJunbi.src = "image/HinanJunbi400.png"
 const charaSagyouTimeSticker = new Image();
+const charaHinanKaishiSticker = new Image();
 
 // const cursorName = new Image();
 // cursorName.src = "nameSticker.png";
@@ -226,8 +229,9 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
         ctxPaint.drawImage(charaHinanJunbi,x,y-25);
       } else if(penStatus == "sagyouTimeSticker"){
         ctxPaint.drawImage(charaSagyouTimeSticker,x+25,y+25);
-      } else if(penStatus == "camera4"){
-        ctxPaint.drawImage(charaCamera4,x+25,y+25);
+      } else if(penStatus == "hinanKaishiSticker"){
+        // console.log("pen is hinankaishi")
+        ctxPaint.drawImage(charaHinanKaishiSticker,x+25,y+25);
       } else if(penStatus == "camera5"){
         ctxPaint.drawImage(charaCamera5,x+25,y+25);
       } else if(penStatus == "eraser"){
