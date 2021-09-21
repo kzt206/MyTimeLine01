@@ -263,7 +263,7 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
     //penStatusの状態に応じて挙動変更
     console.log("Penstatus;",penStatus);
       if(penStatus == "nameSticker") {
-        ctxPaint.drawImage(charaNameSticker,x,y-30);
+        ctxPaint.drawImage(charaNameSticker,x,y-40);
       } else if(penStatus == "doubleCircle"){
         ctxPaint.drawImage(charaDoubleCircle,x,y);
       } else if(penStatus == "singleCircle"){
