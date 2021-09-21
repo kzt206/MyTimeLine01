@@ -33,7 +33,7 @@ input[type='file']{
     cursor: pointer;
 }
 
-#eraserButton, #clearButton,#downloadButton{
+#eraserButtonS,#eraserButtonM,#eraserButtonL, #clearButton,#downloadButton{
     display:inline-block;
     background: #69c;
     color: #fff;

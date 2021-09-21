@@ -61,11 +61,30 @@ penBlueButton.addEventListener("click",()=>{
 })
 
 //消しゴムボタンの設定
-const eraserButton = document.getElementById("eraserButton");
-eraserButton.addEventListener("click",() => {
-    console.log("Eraser is clicked");
+let eraserWidth = 100;
+let eraserHeight = 100;
+const eraserButtonS = document.getElementById("eraserButtonS");
+eraserButtonS.addEventListener("click",() => {
+    console.log("EraserS is clicked");
+    eraserWidth=50;
+    eraserHeight=50;
     penStatus = "eraser";
 })
+const eraserButtonM = document.getElementById("eraserButtonM");
+eraserButtonM.addEventListener("click",() => {
+    console.log("EraserM is clicked");
+    eraserWidth=100;
+    eraserHeight=100;
+    penStatus = "eraser";
+})
+const eraserButtonL = document.getElementById("eraserButtonL");
+eraserButtonL.addEventListener("click",() => {
+    console.log("EraserL is clicked");
+    eraserWidth=150;
+    eraserHeight=150;
+    penStatus = "eraser";
+})
+
 
 //名前シールボタンの設定
 const canvasNameSticker = document.getElementById("canvasNameSticker");
@@ -261,7 +280,7 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
       } else if(penStatus == "camera5"){
         ctxPaint.drawImage(charaCamera5,x+25,y+25);
       } else if(penStatus == "eraser"){
-        ctxPaint.clearRect(e.offsetX,e.offsetY,300,300);
+        ctxPaint.clearRect(x,y,eraserWidth,eraserHeight);
       }
 })
 
@@ -289,7 +308,7 @@ function draw(x2,y2){
         //draw line
         drawLine(x,y,x2,y2);
     }else if(isDrag && penStatus == "eraser"){
-        ctxPaint.clearRect(x,y,20,20);
+        ctxPaint.clearRect(x,y,eraserWidth,eraserHeight);
     }
     
     x = x2;
