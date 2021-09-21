@@ -82,7 +82,7 @@ nameStickerButton.addEventListener("click",() => {
 	ctxNameSticker.textBaseline = 'top';
 	ctxNameSticker.textAlign = 'left';
     //文字のスタイルを指定
-	ctxNameSticker.font = '60px serif';
+	ctxNameSticker.font = '50px serif';
 	ctxNameSticker.fillStyle = 'red';
     ctxNameSticker.fillText(nameSticker.value, 10, 10);
 
@@ -144,7 +144,7 @@ sagyouTimeButton.addEventListener("click",()=> {
 //避難開始ボタンの設定
 const canvasHinanKaishiSticker = document.getElementById("canvasHinanKaishiSticker");
 const ctxHinanKaishiSticker = canvasHinanKaishiSticker.getContext("2d");
-canvasHinanKaishiSticker.width = 800;
+canvasHinanKaishiSticker.width = 600;
 canvasHinanKaishiSticker.height = 150;
 const hinanKaishiButton = document.getElementById("hinanKaishiButton");
 let hinanKaishiStickerURL;
@@ -167,18 +167,44 @@ function createSticker1(ctxSticker,canvasSticker,timeNumber,string1,string2){
         ctxSticker.fillStyle = 'white';
         ctxSticker.fillRect(0, 0, canvasSagyouTimeSticker.width, canvasSagyouTimeSticker.height);
         
-    
+        //矢印を描く
+        // パスをリセット
+        ctxSticker.beginPath () ;
+        // 線を引くスタート地点に移動 
+        ctxSticker.moveTo( 0, 30 ) ;
+        // スタート地点から(200,200)まで線を引く
+        ctxSticker.lineTo( 300, 30 )
+        // 線を引くスタート地点に移動 
+        ctxSticker.moveTo( 5, 0 ) ;
+        // スタート地点から(200,200)まで線を引く
+        ctxSticker.lineTo( 5, 60 )
+        //三角
+        ctxSticker.moveTo(300,10); //最初の点の場所
+		ctxSticker.lineTo(300,50); //2番目の点の場所
+		ctxSticker.lineTo(320,30); //3番目の点の場所
+		ctxSticker.closePath();	//三角形の最後の線 closeさせる
+        // 線の色
+        ctxSticker.strokeStyle = "red" ;
+        ctxSticker.fillStyle = " red "
+        // 線の太さ
+        ctxSticker.lineWidth = 10 ;
+        // 線を描画する
+        ctxSticker.stroke();
+        ctxSticker.fill();
+
+
+
         //文字の配置を指定（左上基準にしたければtop/leftだが、文字の中心座標を指定するのでcenter
         ctxSticker.textBaseline = 'top';
         ctxSticker.textAlign = 'left';
         //文字のスタイルを指定
-        ctxSticker.font = 'bold 60px serif';
+        ctxSticker.font = 'bold 50px serif';
         ctxSticker.fillStyle = 'blue';
-        ctxSticker.fillText(string1, 110, 10);
-        ctxSticker.font = '50px serif';
-        ctxSticker.fillText(string2, 110, 80);
-        ctxSticker.fillText(timeNumber, 600, 80);
-        ctxSticker.fillText("）分", 670, 80);
+        ctxSticker.fillText(string1, 10, 50);
+        ctxSticker.font = '40px serif';
+        ctxSticker.fillText(string2, 10, 110);
+        ctxSticker.fillText(timeNumber, 400, 110);
+        ctxSticker.fillText("）分", 470, 110);
         //一時保存
         base64name = canvasSticker.toDataURL();
         window.localStorage.setItem("saveKey", base64name); //https://www.yoheim.net/blog.php?q=20120204
@@ -228,14 +254,14 @@ this.canvasPaint.addEventListener("mousedown",(e) => {
       } else if(penStatus == "hinanJunbi"){
         ctxPaint.drawImage(charaHinanJunbi,x,y-25);
       } else if(penStatus == "sagyouTimeSticker"){
-        ctxPaint.drawImage(charaSagyouTimeSticker,x+25,y+25);
+        ctxPaint.drawImage(charaSagyouTimeSticker,x,y);
       } else if(penStatus == "hinanKaishiSticker"){
         // console.log("pen is hinankaishi")
-        ctxPaint.drawImage(charaHinanKaishiSticker,x+25,y+25);
+        ctxPaint.drawImage(charaHinanKaishiSticker,x,y);
       } else if(penStatus == "camera5"){
         ctxPaint.drawImage(charaCamera5,x+25,y+25);
       } else if(penStatus == "eraser"){
-        ctxPaint.clearRect(e.offsetX,e.offsetY,60,60);
+        ctxPaint.clearRect(e.offsetX,e.offsetY,300,300);
       }
 })
 
